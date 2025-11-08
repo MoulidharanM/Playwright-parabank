@@ -34,7 +34,7 @@ export default defineConfig({
     video: 'on',
     screenshot: 'on',
     ignoreHTTPSErrors: true,
-    headless: false,
+    headless: true,
   },
 
   /* Configure projects for major browsers */
