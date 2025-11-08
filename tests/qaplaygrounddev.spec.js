@@ -47,7 +47,7 @@ test('qaplayground_multileveldropdown',async({page})=>{
     await page.waitForTimeout(5000);
 })
 
-test.only("qaplayground_dynamictable",async({page})=>{
+test("qaplayground_dynamictable",async({page})=>{
     await page.goto("https://qaplayground.dev/apps/dynamic-table/");
     const namelocate=page.locator(".ml-4");
     const count=await namelocate.count();
