@@ -1,7 +1,12 @@
 const{test,expect}=require("@playwright/test")
 
-test.beforeEach('automationstore',async({ page }) => {
-     
+
+test.beforeEach('Login',async({ page }, testInfo) => {
+    // Skip login for the inventory scraper test to avoid interference
+    if (testInfo.title === 'Full Site Inventory') {
+        return;
+    }
+
     await page.goto("https://automationteststore.com/");
     await page.getByText("Account").first().click();
     await page.locator("#loginFrm_loginname").fill("moulidharanm");
@@ -50,9 +55,37 @@ test('Category Navigation',async({page})=>{
     .map(txt => txt.trim())          // Split multiline entries
     .filter(txt => txt.length > 0);   // Remove empty strings
     console.log(subItems);
-
-    }
-    
-   
-
+}
 })
+
+// test.only('SubCategory Navigation',async({page})=>{
+//     const arr1=['APPAREL & ACCESSORIES'];
+//     for(let i=0;i<arr1.length;i++){
+//     await page.getByRole('link',{name:arr1[i]}).click();
+//     expect(page.locator(".maintext")).toBeVisible();
+//     const subcnav=page.locator(".thumbnails").first();
+//     const subcnavitem=(await subcnav.allTextContents())
+//     .flatMap(txt=>txt.split('\n'))
+//     .map(txt=>txt.trim())
+//     .filter(txt=>txt.length>0);
+//     console.log(subcnavitem);
+    
+//     for(let j=0;j<subcnavitem.length;j++){
+//         const mainitem=page.getByRole('link',{name:subcnavitem[j], exact: true}).first();
+//         await Promise.all([
+//             mainitem.click(),
+//             page.locator(".fixed_wrapper").first().waitFor({ state: 'visible' }),
+//         ]);
+//         const prodloc=page.locator(".fixed_wrapper");
+//         const prodname=prodloc.allTextContents();
+//         const price=prodloc.locator(".pricetag.jumbotron").allTextContents();
+//         console.log(prodname);
+//         console.log(price);
+//         //await page.goBack();
+//  }
+// }
+    
+// })
+
+
+
