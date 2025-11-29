@@ -35,7 +35,7 @@ export default defineConfig({
     video: 'on',
     screenshot: 'on',
     ignoreHTTPSErrors: true,
-    headless: false,
+    headless: true,
     navigationTimeout:120000,
   },
 
